@@ -29,6 +29,7 @@ if (briefForm && formResult) {
   const contactType = briefForm.querySelector("#contact-type");
   const contactValue = briefForm.querySelector("#contact-value");
   const submitButton = briefForm.querySelector(".form-submit");
+  const telegramFallback = briefForm.querySelector("#form-telegram-fallback");
 
   const updateContactField = () => {
     const hints = {
@@ -56,6 +57,8 @@ if (briefForm && formResult) {
     const formData = new FormData(briefForm);
     const service = briefForm.querySelector("#project-type");
     const serviceValue = service.value === "unsure" ? "other" : service.value;
+    telegramFallback.hidden = true;
+    telegramFallback.href = "https://t.me/kuzminkrsk";
     const buttonLabel = submitButton.textContent;
     submitButton.disabled = true;
     formResult.textContent = "Проверяем доступность приёма заявок…";
@@ -113,8 +116,22 @@ if (briefForm && formResult) {
       briefForm.reset();
       updateContactField();
     } catch (error) {
-      formResult.textContent =
-        error instanceof Error ? error.message : "Не удалось отправить заявку. Попробуйте позже.";
+      const message = [
+        "Заявка Digital Agency AI",
+        `Имя: ${String(formData.get("contact-name")).trim()}`,
+        `Связь: ${String(formData.get("contact-type"))} — ${String(formData.get("contact-value")).trim()}`,
+        `Направление: ${serviceValue}`,
+        `Задача: ${String(formData.get("project-description")).trim()}`,
+      ].join("\n");
+      const telegramUrl = new URL("https://t.me/kuzminkrsk");
+      telegramUrl.searchParams.set("text", message);
+      telegramFallback.href = telegramUrl.toString();
+      telegramFallback.hidden = false;
+      formResult.textContent = [
+        "Не удалось подтвердить приём заявки через CRM.",
+        error instanceof Error ? error.message : "Сервис сейчас недоступен.",
+        "Ваша заявка не подтверждена. Проверьте её статус перед повторной отправкой.",
+      ].join(" ");
     } finally {
       submitButton.disabled = false;
       if (buttonLabel) submitButton.textContent = buttonLabel;

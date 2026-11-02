@@ -1043,10 +1043,21 @@ p {
 }
 
 .form-result a,
-.form-direct-link a {
+.form-direct-link a,
+.form-telegram-fallback {
   color: #4f6c1f;
   font-weight: 700;
   text-underline-offset: 3px;
+}
+
+.form-telegram-fallback {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+.form-telegram-fallback[hidden] {
+  display: none;
 }
 
 .form-direct-link {

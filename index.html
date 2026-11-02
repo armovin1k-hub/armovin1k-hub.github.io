@@ -338,27 +338,19 @@
               />
 
               <div class="consent-row">
-                <input id="personal-data-consent" name="personal-data-consent" type="checkbox" required />
-                <label for="personal-data-consent">
-                  Согласен(на) на обработку персональных данных для ответа на заявку. Ознакомился(лась) с
-                  <a href="/legal/#/personal-data-consent" target="_blank" rel="noopener noreferrer">текстом согласия</a>.
-                </label>
-              </div>
-
-              <div class="consent-row">
-                <input id="marketing-consent" name="marketing-consent" type="checkbox" />
-                <label for="marketing-consent">
-                  Согласен(на) получать маркетинговые сообщения на указанный контакт. Это согласие необязательно и не отмечено заранее.
+                <input id="telegram-confirmation" name="telegram-confirmation" type="checkbox" required />
+                <label for="telegram-confirmation">
+                  Подтверждаю: данные попадут в подготовленный текст Telegram только после нажатия кнопки ниже.
+                  Сообщение отправится лишь если я сам(а) нажму «Отправить» в Telegram.
                 </label>
               </div>
 
               <button class="button button-primary form-submit" type="submit">
-                Отправить заявку <span aria-hidden="true">↗</span>
+                Подготовить заявку в Telegram <span aria-hidden="true">↗</span>
               </button>
               <p class="form-privacy">
-                При подключённой CRM заявка сохраняется только после подтверждения согласия. Если CRM
-                недоступна, можно открыть подготовленный текст и отправить его в Telegram вручную.
-                Автоматические сообщения не отправляются.
+                Сайт не сохраняет заявку и не передаёт её в CRM. Telegram откроется с черновиком сообщения;
+                проверьте его и отправьте вручную. Не указывайте лишние личные данные.
               </p>
               <p class="form-result" id="form-result" role="status" aria-live="polite"></p>
               <a
